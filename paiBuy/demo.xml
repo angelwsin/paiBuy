@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"        
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lixing.scm.test.mapper.EmpMapper">
+  <parameterMap type="com.lixing.scm.entity.Emp" id="parameterMapEmp">
+    <parameter property="id"/>
+    <parameter property="name"/>
+    <parameter property="sex"/>
+    <parameter property="age"/>
+    <parameter property="phone"/>
+  </parameterMap>
+  
+  <resultMap type="com.lixing.scm.entity.Emp" id="resultMapEmp">
+    <result property="id" column="id"/>
+    <result property="name" column="name"/>
+    <result property="sex" column="sex"/>
+    <result property="age" column="age"/>
+    <result property="phone" column="phone"/>
+  </resultMap>
+  
+  <insert id="insertEmp" parameterMap="parameterMapEmp">
+    INSERT INTO emp(id,name,sex,age,phone)
+    VALUES(?,?,?,?,?)
+  </insert>
+  <select id="getAllEmp"    resultMap="resultMapEmp">
+    SELECT * FROM emp
+  </select>
+  <select id="getById" parameterType="String" resultMap="resultMapEmp">
+    SELECT * FROM emp
+    WHERE id=#{value}
+  </select>
+  <delete id="deleteEmp" parameterType="String">
+    DELETE FROM emp
+    WHERE id=#{value}
+  </delete>
+  <update id="updateEmp" parameterType="java.util.Map">
+    UPDATE emp
+    SET name=#{name},sex=#{sex},age=#{age},phone=#{phone}
+    WHERE id=#{id}
+  </update>
+</mapper>
